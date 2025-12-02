@@ -141,6 +141,34 @@ class Bomb:
         screen.blit(self.img, self.rct)
 
 
+
+class Score:    
+    """
+    スコア表示に関するクラス
+    """
+     
+    def __init__(self):
+        score = 0  # クラス変数としてスコアを管理
+        self.fonto = pg.font.SysFont("hgp創英角ﾎﾟｯﾌﾟ体", 30)
+        self.img = self.fonto.render("スコア", 0, (0, 0, 255))
+        font_center = (100, 50)
+        self.score = 0
+        self.points = 0
+
+
+    def show_score(screen: pg.Surface):
+        """
+        画面にスコアを表示するメソッド
+        引数 screen：画面Surface
+        """
+
+        screen.blit(Score().img, (20, 20))
+
+
+
+
+
+
 def main():
     pg.display.set_caption("たたかえ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))    
@@ -182,9 +210,24 @@ def main():
                     # ビームが爆弾に当たったら，爆弾とビームを消す
                     beam = None
                     bombs[b] = None
-                    bird.change_img(6, screen)
+                    score = Score()
+                    score.points += 1  # スコアを加算
+                    bird.change_img(6, screen)  # こうかとん画像を変更
                     pg.display.update()
         bombs = [bomb for bomb in bombs if bomb  is not None]
+
+
+
+
+
+        Score.show_score(screen)
+
+
+        
+
+
+
+        
 
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
