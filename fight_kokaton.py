@@ -156,7 +156,7 @@ class Score:
         self.points = 0
 
 
-    def show_score(screen: pg.Surface):
+    def update(screen: pg.Surface):
         """
         画面にスコアを表示するメソッド
         引数 screen：画面Surface
@@ -220,7 +220,7 @@ def main():
 
 
 
-        Score.show_score(screen)
+        Score.update(screen)
 
 
         
