@@ -96,9 +96,6 @@ class Bomb:
         screen.blit(self.img, self.rct)
 
 
-# =======================================
-#  Score クラス（画像どおりに修正済み）
-# =======================================
 class Score:
     def __init__(self):
         self.score = 0
@@ -118,8 +115,6 @@ class Score:
     def update(self, screen: pg.Surface):
         screen.blit(self.img, self.rct)
 
-
-# =======================================
 
 
 def main():
@@ -143,7 +138,7 @@ def main():
 
         screen.blit(bg_img, [0, 0])
 
-        # --- ゲームオーバー判定 ---
+        # --- ゲームオーバー ---
         for b, bomb in enumerate(bombs):
             if bird.rct.colliderect(bomb.rct):
                 bird.change_img(8, screen)
@@ -159,15 +154,15 @@ def main():
             if beam and bomb and beam.rct.colliderect(bomb.rct):
                 beam = None
                 bombs[i] = None
-                score.add(1)  # ← スコア加算
+                score.add(1)  # ← スコア加算する
                 bird.change_img(6, screen)
 
         bombs = [b for b in bombs if b is not None]
 
-        # --- スコア表示 ---
+        # --- スコア表示する ---
         score.update(screen)
 
-        # --- キャラ・オブジェクト更新 ---
+        # --- キャラ・オブジェクト更新を行う ---
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
         if beam:
